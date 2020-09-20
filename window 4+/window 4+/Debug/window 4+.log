@@ -1,2 +1,2 @@
-﻿  window 4+.cpp
-  window 4+.vcxproj -> N:\API\window 4+\Debug\window 4+.exe
+﻿  AttributeFile.cpp
+c1xx : fatal error C1083: Не удается открыть файл источник: AttributeFile.cpp: No such file or directory,
