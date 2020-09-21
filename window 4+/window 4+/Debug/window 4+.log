@@ -1,2 +1,2 @@
-﻿  AttributeFile.cpp
-c1xx : fatal error C1083: Не удается открыть файл источник: AttributeFile.cpp: No such file or directory,
+﻿  window 4+.cpp
+N:\API\window 4+\window 4+\window 4+.cpp(61): fatal error C1075: "{": не найдена несоответствующая лексема

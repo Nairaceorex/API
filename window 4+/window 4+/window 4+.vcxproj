@@ -145,7 +145,6 @@
     <ClInclude Include="window 4+.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AttributeFile.cpp" />
     <ClCompile Include="window 4+.cpp" />
   </ItemGroup>
   <ItemGroup>

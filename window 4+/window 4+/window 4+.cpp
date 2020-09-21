@@ -1,5 +1,6 @@
 ﻿#include <windows.h>
 #include <tchar.h>
+#include <string>
 
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -56,26 +57,33 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, // Дескрипотор текущ
 }
 // Оконная функция вызывается ОС
 // и получает сообщение из очереди для данного приложения
-LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg,
-	WPARAM wParam, LPARAM lParam) { // Обработчик сообщений
-	HDC hDC;
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
+	WPARAM wParam, LPARAM lParam) {
+	//Обработчик сообщений
 	PAINTSTRUCT ps;
-	RECT rect;
-	switch (uMsg)
+	HDC hdc;
+
+	DWORD dwFileAttr = GetFileAttributes(_T("D:\\test.txt"));
+	std::string str;
+	std::wstring stemp;
+	LPCWSTR sw;
+	switch (message)
 	{
 	case WM_PAINT:
-		hDC = BeginPaint(hWnd, &ps);
-		GetClientRect(hWnd, &rect);
-		DrawText(hDC, _T("Hello, World!"), -1, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
-		EndPaint(hWnd, &ps);
-		break;
-	case WM_CLOSE:
-		DestroyWindow(hWnd);
-		break;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break; //Завершении программы
-	default: return DefWindowProc(hWnd, uMsg, wParam, lParam);
+
+
+		if (dwFileAttr & FILE_ATTRIBUTE_READONLY) str += "READONLY ";
+		if (dwFileAttr & FILE_ATTRIBUTE_HIDDEN) str += "HIDDEN ";
+		if (dwFileAttr & FILE_ATTRIBUTE_SYSTEM) str += "SYSTEM ";
+		if (dwFileAttr & FILE_ATTRIBUTE_DIRECTORY) str += "DIRECTORY ";
+		if (dwFileAttr & FILE_ATTRIBUTE_ARCHIVE) str += "ARCHIVE ";
+		if (dwFileAttr & FILE_ATTRIBUTE_ENCRYPTED) str += "ENCRYPTED ";
+		if (dwFileAttr & FILE_ATTRIBUTE_NORMAL) str += "NORMAL ";
+		if (dwFileAttr & FILE_ATTRIBUTE_TEMPORARY) str += "TEMPORARY ";
+		if (dwFileAttr & FILE_ATTRIBUTE_SPARSE_FILE) str += "SPARSE_FILE ";
+		if (dwFileAttr & FILE_ATTRIBUTE_REPARSE_POINT) str += "REPARSE_POINT ";
+		if (dwFileAttr & FILE_ATTRIBUTE_COMPRESSED) str += "COMPRESSED ";
+		if (dwFileAttr & FILE_ATTRIBUTE_OFFLINE) str += "OFFLINE ";
+		if (dwFileAttr & FILE_ATTRIBUTE_NOT_CONTENT_INDEXED) str += "NOT_CONTENT_INDEXED ";
 	}
-	return 0;
 }
